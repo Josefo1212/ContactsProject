@@ -102,3 +102,19 @@ body {
   border-radius: 12px;
   font-size: 14px;
 }
+
+.login-footer {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #6d5740;
+}
+
+.login-link {
+  color: #a77539;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}

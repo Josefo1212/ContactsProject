@@ -1,42 +1,20 @@
-import { useEffect, useState } from 'react';
-import { addUser, getUserByUsername } from '../services/indexdDB';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.css';
-
-const DEFAULT_USER = {
-	username: 'admin',
-	password: '1234',
-};
+import { useLogin } from '../hooks/useLogin';
 
 const Login = () => {
-	const [username, setUsername] = useState('');
-	const [password, setPassword] = useState('');
-	const [error, setError] = useState('');
-	const [success, setSuccess] = useState('');
-
-	useEffect(() => {
-		const ensureDefaultUser = async () => {
-			const existing = await getUserByUsername(DEFAULT_USER.username);
-			if (!existing) {
-				await addUser(DEFAULT_USER);
-			}
-		};
-
-		void ensureDefaultUser();
-	}, []);
-
-	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		setError('');
-		setSuccess('');
-
-		const user = await getUserByUsername(username.trim());
-		if (!user || user.password !== password) {
-			setError('Usuario o contrasena incorrectos');
-			return;
-		}
-
-		setSuccess(`Bienvenido, ${user.username}`);
-	};
+	const navigate = useNavigate();
+	const {
+		username,
+		setUsername,
+		password,
+		setPassword,
+		error,
+		success,
+		handleSubmit,
+	} = useLogin((usernameValue) =>
+		navigate('/welcome', { state: { username: usernameValue } }),
+	);
 
 	return (
 		<div className="login-page">
@@ -75,6 +53,13 @@ const Login = () => {
 				<button className="login-button" type="submit">
 					Entrar
 				</button>
+
+				<p className="login-footer">
+					No tienes cuenta?{' '}
+					<Link className="login-link" to="/register">
+						Crear cuenta
+					</Link>
+				</p>
 
 				{error ? <p className="login-error">{error}</p> : null}
 				{success ? <p className="login-success">{success}</p> : null}

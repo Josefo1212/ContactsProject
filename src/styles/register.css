@@ -1,0 +1,15 @@
+.register-card {
+  width: min(520px, 100%);
+}
+
+.register-card .login-input {
+  background: #fff8ee;
+}
+
+.register-card .login-button {
+  background: #7a4f2a;
+}
+
+.register-card .login-button:hover {
+  box-shadow: 0 12px 24px rgba(122, 79, 42, 0.3);
+}
