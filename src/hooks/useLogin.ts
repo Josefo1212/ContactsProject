@@ -32,6 +32,16 @@ export const useLogin = (onSuccess?: (username: string) => void) => {
     setError('');
     setSuccess('');
 
+    if(username.length < 3 || username.length > 20) {
+      setError('El nombre de usuario debe tener entre 3 y 20 caracteres');
+      return;
+    }
+
+    if(password.length < 8 || password.length > 15) {
+      setError('La contrasena debe tener entre 8 y 15 caracteres');
+      return;
+    }
+
     const user = await getUserByUsername(username.trim());
     if (!user || user.password !== password) {
       setError('Usuario o contrasena incorrectos');
