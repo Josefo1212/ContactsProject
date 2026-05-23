@@ -2,14 +2,18 @@ import { openDB } from 'idb';
 import type { User } from '../models/User';
 
 const DB_NAME = 'contactosDB';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const USER_STORE = 'users';
+const CONTACT_STORE = 'contacts';
 
 export const getDB = async () => {
   return openDB(DB_NAME, DB_VERSION, {
     upgrade(db) {
       if (!db.objectStoreNames.contains(USER_STORE)) {
         db.createObjectStore(USER_STORE, { keyPath: 'id', autoIncrement: true });
+      }
+      if (!db.objectStoreNames.contains(CONTACT_STORE)) {
+        db.createObjectStore(CONTACT_STORE, { keyPath: 'id', autoIncrement: true });
       }
     },
   });

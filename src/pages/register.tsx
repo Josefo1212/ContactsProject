@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../styles/login.css';
 import '../styles/register.css';
 import { useRegister } from '../hooks/useRegister';
@@ -89,6 +90,13 @@ const Register = () => {
 				<button className="login-button" type="submit">
 					Registrarse
 				</button>
+
+				<p className="login-footer">
+					Ya tienes cuenta?{' '}
+					<Link className="login-link" to="/login">
+						Volver al login
+					</Link>
+				</p>
 
 				{error ? <p className="login-error">{error}</p> : null}
 				{success ? <p className="login-success">{success}</p> : null}
