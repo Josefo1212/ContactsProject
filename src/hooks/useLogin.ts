@@ -4,7 +4,7 @@ import { addUser, getUserByUsername } from '../services/indexdDB';
 
 const DEFAULT_USER = {
   username: 'admin',
-  password: '1234',
+  password: '12345678',
   phone: '0000000000',
   name: 'Admin',
   lastName: 'Demo',
