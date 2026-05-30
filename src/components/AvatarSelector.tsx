@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 type Props = {
 	selected: string;
 	onSelect: (avatar: string) => void;
@@ -9,10 +11,13 @@ const avatars = Object.entries(
 	.map(([path, url]) => ({ path, url: url as string }))
 	.sort((a, b) => a.path.localeCompare(b.path));
 
+
 export const AvatarSelector = ({ selected, onSelect }: Props) => {
-	if (avatars.length === 0) {
-		return null;
-	}
+	useEffect(() => {
+		if (!selected && avatars[0]) {
+			onSelect(avatars[0].url);
+		}
+	}, [selected, onSelect]);
 
 	return (
 		<div className="avatar-selector">

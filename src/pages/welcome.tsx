@@ -49,9 +49,6 @@ const Welcome = () => {
         <div>
           <p className="section-kicker">ACCESO VERIFICADO</p>
           <h1 className="contacts-title">Bienvenido, {username}</h1>
-          <p className="contacts-subtitle">
-            CRUD simple de contactos con formulario, edición, borrado y vista completa en popup.
-          </p>
         </div>
         <Link className="contact-button ghost" to="/login">
           Volver al login

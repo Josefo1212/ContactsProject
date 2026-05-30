@@ -21,7 +21,7 @@ export const ContactModal = ({ contact, onClose }: Props) => {
           <p className="section-kicker">Detalle completo</p>
           <div className="contact-modal-hero">
             <div className="contact-avatar" aria-hidden="true">
-              {contact.avatar ? <img src={contact.avatar} alt="" /> : contact.nombre.slice(0, 1).toUpperCase()}
+              {contact.avatar ? <img src={contact.avatar} alt="" /> : null}
             </div>
             <h2>
               <ContactName nombre={contact.nombre} apellido={contact.apellido} />
