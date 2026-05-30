@@ -1,11 +1,13 @@
 import type { ChangeEvent } from 'react';
 import type { ContactFormValues } from '../models/Contact';
 import { ContactFormButtons } from './ContactFormButtons';
+import { AvatarSelector } from './AvatarSelector';
 
 type Props = {
   form: ContactFormValues;
   isEditing: boolean;
   onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onAvatarChange: (avatar: string) => void;
   onReset: () => void;
 };
 
@@ -30,7 +32,7 @@ const renderField = (
   </label>
 );
 
-export const ContactFormControls = ({ form, isEditing, onChange, onReset }: Props) => {
+export const ContactFormControls = ({ form, isEditing, onChange, onAvatarChange, onReset }: Props) => {
   return (
     <>
       <div className="contact-form-header">
@@ -39,6 +41,8 @@ export const ContactFormControls = ({ form, isEditing, onChange, onReset }: Prop
           <h2>Crear contacto</h2>
         </div>
       </div>
+
+      <AvatarSelector selected={form.avatar} onSelect={onAvatarChange} />
 
       <div className="contact-form-grid">
         {renderField('Nombre', 'nombre', form.nombre, onChange, 'Ej: Laura')}

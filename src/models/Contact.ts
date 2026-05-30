@@ -7,6 +7,7 @@ export interface Contact {
   telefono: string;
   apodo: string;
   nota: string;
+  avatar: string;
   creadoEn: string;
 }
 
@@ -19,4 +20,5 @@ export const EMPTY_CONTACT_FORM: ContactFormValues = {
   telefono: '',
   apodo: '',
   nota: '',
+  avatar: '',
 };

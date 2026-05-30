@@ -14,7 +14,7 @@ export const ContactCard = ({ contact, onView, onEdit, onDelete }: Props) => {
     <article className="contact-card">
       <button type="button" className="contact-card-main" onClick={() => onView(contact)}>
         <div className="contact-avatar" aria-hidden="true">
-          {contact.nombre.slice(0, 1).toUpperCase() || 'C'}
+          {contact.avatar ? <img src={contact.avatar} alt="" /> : null}
         </div>
 
         <div className="contact-card-copy">

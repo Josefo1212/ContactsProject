@@ -34,6 +34,7 @@ const Welcome = () => {
     success,
     setSearch,
     handleChange,
+    handleAvatarChange,
     handleSubmit,
     handleDelete,
     openContact,
@@ -63,6 +64,7 @@ const Welcome = () => {
             form={form}
             isEditing={editingId !== null}
             onChange={handleChange}
+            onAvatarChange={handleAvatarChange}
             onSubmit={handleSubmit}
             onReset={resetForm}
           />

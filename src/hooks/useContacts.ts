@@ -68,6 +68,7 @@ export const useContacts = (ownerUsername: string) => {
       telefono: contact.telefono,
       apodo: contact.apodo,
       nota: contact.nota,
+      avatar: contact.avatar,
     });
     setSelectedContact(null);
     setError('');
@@ -123,6 +124,7 @@ export const useContacts = (ownerUsername: string) => {
       telefono: form.telefono.trim(),
       apodo: form.apodo.trim(),
       nota: form.nota.trim(),
+      avatar: form.avatar.trim(),
       creadoEn: new Date().toISOString(),
     };
 
@@ -147,6 +149,10 @@ export const useContacts = (ownerUsername: string) => {
     }
   };
 
+  const handleAvatarChange = (avatar: string) => {
+    setForm((previous) => ({ ...previous, avatar }));
+  };
+
   return {
     contacts: filteredContacts,
     form,
@@ -157,6 +163,7 @@ export const useContacts = (ownerUsername: string) => {
     success,
     setSearch,
     handleChange,
+    handleAvatarChange,
     handleSubmit,
     handleDelete,
     openContact,

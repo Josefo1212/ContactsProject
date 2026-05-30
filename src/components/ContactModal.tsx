@@ -19,9 +19,14 @@ export const ContactModal = ({ contact, onClose }: Props) => {
         </button>
         <header className="contact-modal-header">
           <p className="section-kicker">Detalle completo</p>
-          <h2>
-            <ContactName nombre={contact.nombre} apellido={contact.apellido} />
-          </h2>
+          <div className="contact-modal-hero">
+            <div className="contact-avatar" aria-hidden="true">
+              {contact.avatar ? <img src={contact.avatar} alt="" /> : contact.nombre.slice(0, 1).toUpperCase()}
+            </div>
+            <h2>
+              <ContactName nombre={contact.nombre} apellido={contact.apellido} />
+            </h2>
+          </div>
           <p className="contact-modal-subtitle">{contact.apodo || 'Sin apodo'}</p>
         </header>
 
