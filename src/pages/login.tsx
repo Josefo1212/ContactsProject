@@ -20,7 +20,7 @@ const Login = () => {
 		<div className="login-page">
 			<form className="login-card" onSubmit={handleSubmit}>
 				<h1 className="login-title">Iniciar sesion</h1>
-				<p className="login-subtitle">Usa admin / 1234 para probar</p>
+				<p className="login-subtitle">Usa jose / 12345678 para probar</p>
 
 				<label className="login-label" htmlFor="username">
 					Usuario

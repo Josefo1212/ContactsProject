@@ -1,0 +1,63 @@
+/* Ellipsis trick: single-line box + hidden overflow to force the three dots. */
+.contact-name {
+  position: relative;
+  display: inline-block;
+  max-width: min(100%, var(--contact-name-max, 28ch));
+  overflow: visible;
+  cursor: default;
+  vertical-align: bottom;
+}
+
+/* Text wrapper: this is the element that actually gets the ellipsis. */
+.contact-name-text {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}
+
+/* Tooltip: use pseudo-elements so no extra DOM nodes are needed. */
+.contact-name::before,
+.contact-name::after {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease, transform 120ms ease;
+  z-index: 10;
+}
+
+/* Tooltip bubble: positioned above the text and reads from data-tooltip. */
+.contact-name::before {
+  content: attr(data-tooltip);
+  bottom: calc(100% + 10px);
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: #2f2418;
+  color: #fffaf2;
+  font-size: 12px;
+  line-height: 1.2;
+  max-width: min(360px, 90vw);
+  white-space: normal;
+  word-break: break-word;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(31, 19, 7, 0.2);
+}
+
+/* Tooltip arrow: sits just below the bubble pointing down to the text. */
+.contact-name::after {
+  content: "";
+  bottom: calc(100% + 4px);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: #2f2418 transparent transparent transparent;
+}
+
+.contact-name:hover::before,
+.contact-name:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}

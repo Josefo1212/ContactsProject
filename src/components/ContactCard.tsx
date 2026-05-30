@@ -1,5 +1,6 @@
 import type { Contact } from '../models/Contact';
 import { ContactCardActions } from './ContactCardActions';
+import { ContactName } from './ContactName';
 
 type Props = {
   contact: Contact;
@@ -22,7 +23,7 @@ export const ContactCard = ({ contact, onView, onEdit, onDelete }: Props) => {
             <span className="contact-muted">{contact.apodo || 'Sin apodo'}</span>
           </div>
           <h3>
-            {contact.nombre} {contact.apellido}
+            <ContactName nombre={contact.nombre} apellido={contact.apellido} />
           </h3>
           <p>{contact.telefono}</p>
         </div>
