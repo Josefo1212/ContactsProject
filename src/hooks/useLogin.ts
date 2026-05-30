@@ -10,6 +10,9 @@ const DEFAULT_USER = {
   lastName: 'Demo',
 };
 
+const isLengthInvalid = (value: string, min: number, max: number) =>
+  value.length < min || value.length > max;
+
 export const useLogin = (onSuccess?: (username: string) => void) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -32,12 +35,12 @@ export const useLogin = (onSuccess?: (username: string) => void) => {
     setError('');
     setSuccess('');
 
-    if(username.length < 2 || username.length > 20) {
+    if (isLengthInvalid(username, 2, 20)) {
       setError('El nombre de usuario debe tener entre 2 y 20 caracteres');
       return;
     }
 
-    if(password.length < 8 || password.length > 15) {
+    if (isLengthInvalid(password, 8, 15)) {
       setError('La contrasena debe tener entre 8 y 15 caracteres');
       return;
     }

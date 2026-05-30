@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import '../styles/login.css';
 import '../styles/register.css';
 import { useRegister } from '../hooks/useRegister';
+import { FeedbackMessage } from '../components/FeedbackMessage';
 
 const Register = () => {
 	const { form, error, success, handleChange, handleSubmit } = useRegister();
@@ -98,8 +99,12 @@ const Register = () => {
 					</Link>
 				</p>
 
-				{error ? <p className="login-error">{error}</p> : null}
-				{success ? <p className="login-success">{success}</p> : null}
+				<FeedbackMessage
+					error={error}
+					success={success}
+					errorClassName="login-error"
+					successClassName="login-success"
+				/>
 			</form>
 		</div>
 	);

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.css';
 import { useLogin } from '../hooks/useLogin';
+import { FeedbackMessage } from '../components/FeedbackMessage';
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -61,8 +62,12 @@ const Login = () => {
 					</Link>
 				</p>
 
-				{error ? <p className="login-error">{error}</p> : null}
-				{success ? <p className="login-success">{success}</p> : null}
+				<FeedbackMessage
+					error={error}
+					success={success}
+					errorClassName="login-error"
+					successClassName="login-success"
+				/>
 			</form>
 		</div>
 	);

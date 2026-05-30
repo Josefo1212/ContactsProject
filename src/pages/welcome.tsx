@@ -5,6 +5,7 @@ import { useContacts } from '../hooks/useContacts';
 import { ContactCard } from '../components/ContactCard';
 import { ContactForm } from '../components/ContactForm';
 import { ContactModal } from '../components/ContactModal';
+import { FeedbackMessage } from '../components/FeedbackMessage';
 import type { Contact } from '../models/Contact';
 
 type LocationState = {
@@ -65,8 +66,12 @@ const Welcome = () => {
             onSubmit={handleSubmit}
             onReset={resetForm}
           />
-          {error ? <p className="contact-message error">{error}</p> : null}
-          {success ? <p className="contact-message success">{success}</p> : null}
+          <FeedbackMessage
+            error={error}
+            success={success}
+            errorClassName="contact-message error"
+            successClassName="contact-message success"
+          />
         </section>
 
         <section className="contacts-panel contacts-panel--list">

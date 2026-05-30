@@ -11,7 +11,6 @@ const avatars = Object.entries(
 	.map(([path, url]) => ({ path, url: url as string }))
 	.sort((a, b) => a.path.localeCompare(b.path));
 
-
 export const AvatarSelector = ({ selected, onSelect }: Props) => {
 	useEffect(() => {
 		if (!selected && avatars[0]) {
