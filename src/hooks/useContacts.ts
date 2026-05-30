@@ -88,6 +88,31 @@ export const useContacts = (ownerUsername: string) => {
       return;
     }
 
+    if(form.nombre.length < 2 || form.nombre.length > 20) {
+      setError('El nombre debe tener al menos 2 caracteres y no puede exceder los 20 caracteres');
+      return;
+    }
+
+    if(form.apellido.length < 2 || form.apellido.length > 20) {
+      setError('El apellido debe tener al menos 2 caracteres y no puede exceder los 20 caracteres');
+      return;
+    }
+
+    if(form.telefono.length < 7 || form.telefono.length > 15) {
+      setError('El numero de telefono debe tener al menos 7 caracteres y no puede exceder los 15 caracteres');
+      return;
+    }
+
+    if(form.apodo.length > 15) {
+      setError('El apodo no puede exceder los 15 caracteres');
+      return;
+    }
+
+    if(form.nota.length > 100) {
+      setError('La nota no puede exceder los 100 caracteres');
+      return;
+    }
+
     const numero = editingId !== null ? form.numero.trim() : buildNextContactNumber(contacts);
 
     const payload = {

@@ -32,8 +32,8 @@ export const useLogin = (onSuccess?: (username: string) => void) => {
     setError('');
     setSuccess('');
 
-    if(username.length < 3 || username.length > 20) {
-      setError('El nombre de usuario debe tener entre 3 y 20 caracteres');
+    if(username.length < 2 || username.length > 20) {
+      setError('El nombre de usuario debe tener entre 2 y 20 caracteres');
       return;
     }
 

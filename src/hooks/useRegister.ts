@@ -40,8 +40,8 @@ export const useRegister = () => {
     }
 
     // Validación de username
-    if (form.username.length < 3 || form.username.length > 20) {
-      setError('El usuario debe tener entre 3 y 20 caracteres');
+    if (form.username.length < 2 || form.username.length > 20) {
+      setError('El usuario debe tener entre 2 y 20 caracteres');
       return;
     }
 
@@ -58,14 +58,14 @@ export const useRegister = () => {
     }
 
     // Validación de nombre
-    if (form.name.length < 2 || form.name.length > 30) {
-      setError('El nombre debe tener entre 2 y 30 caracteres');
+    if (form.name.length < 2 || form.name.length > 20) {
+      setError('El nombre debe tener entre 2 y 20 caracteres');
       return;
     }
 
     // Validación de apellido
-    if (form.lastName.length < 2 || form.lastName.length > 30) {
-      setError('El apellido debe tener entre 2 y 30 caracteres');
+    if (form.lastName.length < 2 || form.lastName.length > 20) {
+      setError('El apellido debe tener entre 2 y 20 caracteres');
       return;
     }
 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../styles/contacts.css';
 import { useContacts } from '../hooks/useContacts';
@@ -13,6 +14,14 @@ const Welcome = () => {
   const location = useLocation();
   const state = location.state as LocationState | null;
   const username = (state?.username ?? 'jose').toLowerCase();
+
+  const [viewVersion, setViewVersion] = useState(1);
+  const viewOptions = [
+    { id: 1, label: 'Lista extendida' },
+    { id: 2, label: 'Mosaico' },
+    { id: 3, label: 'Split 2 columnas' },
+    { id: 4, label: 'Carnet ID' },
+  ];
 
   const {
     contacts,
@@ -65,15 +74,32 @@ const Welcome = () => {
               <p className="section-kicker">Contactos</p>
               <h2>{contacts.length} contacto(s)</h2>
             </div>
-            <input
-              className="contacts-search-input"
-              type="search"
-              placeholder="Buscar contacto"
-              onChange={(event) => setSearch(event.target.value)}
-            />
+            <div className="contacts-toolbar">
+              <input
+                className="contacts-search-input"
+                type="search"
+                placeholder="Buscar contacto"
+                onChange={(event) => setSearch(event.target.value)}
+              />
+              <div className="contacts-view-group" role="group" aria-label="Selector de vista">
+                {viewOptions.map((option) => (
+                  <button
+                    key={option.id}
+                    type="button"
+                    className={`contact-button ghost contacts-view-option${
+                      viewVersion === option.id ? ' is-active' : ''
+                    }`}
+                    onClick={() => setViewVersion(option.id)}
+                    aria-pressed={viewVersion === option.id}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="contacts-grid">
+          <div className={`contacts-grid vista-${viewVersion}`}>
             {contacts.length > 0 ? (
               contacts.map((contact) => (
                 <ContactCard

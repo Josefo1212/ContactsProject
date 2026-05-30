@@ -27,7 +27,7 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 120ms ease, transform 120ms ease;
-  z-index: 10;
+  z-index: 9999;
 }
 
 /* Tooltip bubble: positioned above the text and reads from data-tooltip. */
@@ -41,8 +41,7 @@
   font-size: 12px;
   line-height: 1.2;
   max-width: min(360px, 90vw);
-  white-space: normal;
-  word-break: break-word;
+  white-space: nowrap;
   text-align: center;
   box-shadow: 0 10px 20px rgba(31, 19, 7, 0.2);
 }
