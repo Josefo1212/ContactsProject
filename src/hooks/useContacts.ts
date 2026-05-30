@@ -139,11 +139,6 @@ export const useContacts = (ownerUsername: string) => {
   };
 
   const handleDelete = async (contact: Contact) => {
-    const confirmed = window.confirm(`¿Borrar a ${contact.nombre} ${contact.apellido}?`);
-    if (!confirmed) {
-      return;
-    }
-
     await deleteContact(contact.id);
     await loadContacts();
 

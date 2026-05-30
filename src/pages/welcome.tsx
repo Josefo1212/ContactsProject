@@ -5,6 +5,7 @@ import { useContacts } from '../hooks/useContacts';
 import { ContactCard } from '../components/ContactCard';
 import { ContactForm } from '../components/ContactForm';
 import { ContactModal } from '../components/ContactModal';
+import type { Contact } from '../models/Contact';
 
 type LocationState = {
   username?: string;
@@ -16,6 +17,7 @@ const Welcome = () => {
   const username = (state?.username ?? 'jose').toLowerCase();
 
   const [viewVersion, setViewVersion] = useState(1);
+  const [deleteTarget, setDeleteTarget] = useState<null | Contact>(null);
   const viewOptions = [
     { id: 1, label: 'Lista extendida' },
     { id: 2, label: 'Mosaico' },
@@ -107,7 +109,7 @@ const Welcome = () => {
                   contact={contact}
                   onView={openContact}
                   onEdit={startEdit}
-                  onDelete={handleDelete}
+                  onDelete={() => setDeleteTarget(contact)}
                 />
               ))
             ) : (
@@ -121,6 +123,35 @@ const Welcome = () => {
       </main>
 
       <ContactModal contact={selectedContact} onClose={closeContact} />
+      {deleteTarget ? (
+        <div className="contact-confirm-backdrop" role="dialog" aria-modal="true">
+          <div className="contact-confirm">
+            <h3>¿Estas seguro que quieres eliminar?</h3>
+            <p>
+              Se eliminara el contacto {deleteTarget.nombre} {deleteTarget.apellido}.
+            </p>
+            <div className="contact-confirm-actions">
+              <button
+                type="button"
+                className="contact-button danger"
+                onClick={() => {
+                  void handleDelete(deleteTarget);
+                  setDeleteTarget(null);
+                }}
+              >
+                Confirmar
+              </button>
+              <button
+                type="button"
+                className="contact-button ghost"
+                onClick={() => setDeleteTarget(null)}
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -451,6 +451,34 @@
   overflow: visible;
 }
 
+.contact-confirm-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 19, 7, 0.52);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 20;
+}
+
+.contact-confirm {
+  width: min(420px, 100%);
+  padding: 20px;
+  border-radius: 20px;
+  background: #fffaf2;
+  border: 1px solid rgba(115, 88, 57, 0.14);
+  box-shadow: 0 20px 40px rgba(95, 69, 39, 0.18);
+  display: grid;
+  gap: 12px;
+}
+
+.contact-confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .contact-modal {
   width: min(640px, 100%);
   max-height: 88vh;
