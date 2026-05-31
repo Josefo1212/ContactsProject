@@ -96,12 +96,12 @@ export const useContacts = (ownerUsername: string) => {
         message: 'Nombre, apellido y numero de tlf son obligatorios',
       },
       {
-        isInvalid: isLengthInvalid(form.nombre, 2, 20),
-        message: 'El nombre debe tener al menos 2 caracteres y no puede exceder los 20 caracteres',
+        isInvalid: isLengthInvalid(form.nombre, 2, 30),
+        message: 'El nombre debe tener al menos 2 caracteres y no puede exceder los 30 caracteres',
       },
       {
-        isInvalid: isLengthInvalid(form.apellido, 2, 20),
-        message: 'El apellido debe tener al menos 2 caracteres y no puede exceder los 20 caracteres',
+        isInvalid: isLengthInvalid(form.apellido, 2, 30),
+        message: 'El apellido debe tener al menos 2 caracteres y no puede exceder los 30 caracteres',
       },
       {
         isInvalid: !PHONE_ALLOWED_PATTERN.test(phoneValue),

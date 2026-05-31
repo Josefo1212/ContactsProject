@@ -55,8 +55,13 @@
   border-color: #2f2418 transparent transparent transparent;
 }
 
-.contact-name:hover::before,
-.contact-name:hover::after {
+.contact-name[data-tooltip=""]::before,
+.contact-name[data-tooltip=""]::after {
+  display: none;
+}
+
+.contact-name:not([data-tooltip=""]):hover::before,
+.contact-name:not([data-tooltip=""]):hover::after {
   opacity: 1;
   transform: translateX(-50%) translateY(-2px);
 }
