@@ -45,7 +45,7 @@ const Welcome = () => {
   } = useContacts(username);
 
   return (
-    <div className="contacts-page">
+    <div className={`contacts-page${selectedContact ? ' is-modal-open' : ''}`}>
       <header className="contacts-hero">
         <div>
           <p className="section-kicker">ACCESO VERIFICADO</p>

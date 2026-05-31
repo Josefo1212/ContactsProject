@@ -438,6 +438,14 @@
   z-index: 10;
 }
 
+.contacts-page.is-modal-open .contact-card {
+  pointer-events: none;
+}
+
+.contacts-page.is-modal-open .contact-card:hover {
+  z-index: auto;
+}
+
 .contact-card-main {
   border: 0;
   padding: 0;
@@ -611,6 +619,8 @@
   background: rgba(0, 0, 0, 0.08);
   font-size: 28px;
   cursor: pointer;
+  z-index: 3;
+  pointer-events: auto;
 }
 
 .contact-detail-grid {
