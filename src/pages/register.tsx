@@ -54,6 +54,9 @@ const Register = () => {
 					placeholder="Numero de telefono"
 					value={form.phone}
 					onChange={handleChange}
+					inputMode="tel"
+					pattern="[0-9+-]*"
+					title="Solo se permiten numeros, + y -"
 					autoComplete="tel"
 					required
 				/>

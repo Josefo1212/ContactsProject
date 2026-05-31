@@ -20,6 +20,8 @@ const initialForm: RegisterForm = {
 
 const isLengthInvalid = (value: string, min: number, max: number) =>
   value.length < min || value.length > max;
+const PHONE_ALLOWED_PATTERN = /^[0-9+-]+$/;
+const sanitizePhone = (value: string) => value.replace(/[^0-9+-]/g, '');
 
 export const useRegister = () => {
   const [form, setForm] = useState<RegisterForm>(initialForm);
@@ -28,7 +30,8 @@ export const useRegister = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const nextValue = name === 'phone' ? sanitizePhone(value) : value;
+    setForm((prev) => ({ ...prev, [name]: nextValue }));
   };
 
   const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
@@ -51,8 +54,14 @@ export const useRegister = () => {
       return;
     }
 
-    if (!/^\d{8,15}$/.test(form.phone)) {
-      setError('El teléfono debe tener solo números y entre 8 y 15 dígitos');
+    const phoneValue = form.phone.trim();
+    if (!PHONE_ALLOWED_PATTERN.test(phoneValue)) {
+      setError('El telefono solo puede contener numeros, + y -');
+      return;
+    }
+
+    if (isLengthInvalid(phoneValue, 8, 15)) {
+      setError('El telefono debe tener entre 8 y 15 caracteres');
       return;
     }
 
@@ -75,7 +84,7 @@ export const useRegister = () => {
     await addUser({
       username: form.username.trim(),
       password: form.password,
-      phone: form.phone.trim(),
+      phone: phoneValue,
       name: form.name.trim(),
       lastName: form.lastName.trim(),
     });

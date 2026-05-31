@@ -6,6 +6,8 @@ import { EMPTY_CONTACT_FORM, type Contact, type ContactFormValues } from '../mod
 const normalize = (value: string) => value.trim().toLowerCase();
 const isLengthInvalid = (value: string, min: number, max: number) =>
   value.length < min || value.length > max;
+const PHONE_ALLOWED_PATTERN = /^[0-9+-]+$/;
+const sanitizePhone = (value: string) => value.replace(/[^0-9+-]/g, '');
 
 const buildNextContactNumber = (contacts: Contact[]) => {
   const existingNumbers = contacts
@@ -51,7 +53,8 @@ export const useContacts = (ownerUsername: string) => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
-    setForm((previous) => ({ ...previous, [name]: value }));
+    const nextValue = name === 'telefono' ? sanitizePhone(value) : value;
+    setForm((previous) => ({ ...previous, [name]: nextValue }));
   };
 
   const resetForm = () => {
@@ -86,6 +89,7 @@ export const useContacts = (ownerUsername: string) => {
     setError('');
     setSuccess('');
 
+    const phoneValue = form.telefono.trim();
     const validations = [
       {
         isInvalid: [form.nombre, form.apellido, form.telefono].some((value) => !value.trim()),
@@ -100,7 +104,11 @@ export const useContacts = (ownerUsername: string) => {
         message: 'El apellido debe tener al menos 2 caracteres y no puede exceder los 20 caracteres',
       },
       {
-        isInvalid: isLengthInvalid(form.telefono, 7, 15),
+        isInvalid: !PHONE_ALLOWED_PATTERN.test(phoneValue),
+        message: 'El numero de telefono solo puede contener numeros, + y -',
+      },
+      {
+        isInvalid: isLengthInvalid(phoneValue, 7, 15),
         message: 'El numero de telefono debe tener al menos 7 caracteres y no puede exceder los 15 caracteres',
       },
       {
@@ -127,7 +135,7 @@ export const useContacts = (ownerUsername: string) => {
       numero,
       nombre: form.nombre.trim(),
       apellido: form.apellido.trim(),
-      telefono: form.telefono.trim(),
+      telefono: phoneValue,
       apodo: form.apodo.trim(),
       nota: form.nota.trim(),
       avatar: form.avatar.trim(),

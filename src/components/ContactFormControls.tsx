@@ -1,4 +1,4 @@
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, InputHTMLAttributes } from 'react';
 import type { ContactFormValues } from '../models/Contact';
 import { ContactFormButtons } from './ContactFormButtons';
 import { AvatarSelector } from './AvatarSelector';
@@ -18,6 +18,7 @@ const renderField = (
   onChange: Props['onChange'],
   placeholder: string,
   type: 'text' | 'tel' = 'text',
+  inputProps?: InputHTMLAttributes<HTMLInputElement>,
 ) => (
   <label className="contact-field" htmlFor={String(name)}>
     <span>{label}</span>
@@ -28,6 +29,7 @@ const renderField = (
       onChange={onChange}
       placeholder={placeholder}
       type={type}
+      {...inputProps}
     />
   </label>
 );
@@ -47,7 +49,11 @@ export const ContactFormControls = ({ form, isEditing, onChange, onAvatarChange,
       <div className="contact-form-grid">
         {renderField('Nombre', 'nombre', form.nombre, onChange, 'Ej: Laura')}
         {renderField('Apellido', 'apellido', form.apellido, onChange, 'Ej: Perez')}
-        {renderField('Numero de tlf', 'telefono', form.telefono, onChange, 'Ej: +54 11 5555 1234', 'tel')}
+        {renderField('Numero de tlf', 'telefono', form.telefono, onChange, 'Ej: +54 11 5555 1234', 'tel', {
+          inputMode: 'tel',
+          pattern: '[0-9+-]*',
+          title: 'Solo se permiten numeros, + y -',
+        })}
       </div>
 
       <label className="contact-field contact-field--wide" htmlFor="apodo">
