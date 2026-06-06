@@ -1,3 +1,4 @@
+import React from 'react';
 import type { ChangeEvent, InputHTMLAttributes } from 'react';
 import type { ContactFormValues } from '../models/Contact';
 import { ContactFormButtons } from './ContactFormButtons';
@@ -34,6 +35,17 @@ const renderField = (
   </label>
 );
 
+const lettersOnly = (e: React.FormEvent<HTMLInputElement>) => {
+  const input = e.currentTarget;
+  input.value = input.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, '');
+};
+
+const lettersOnlyProps: InputHTMLAttributes<HTMLInputElement> = {
+  pattern: '[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]*',
+  title: 'Solo se permiten letras',
+  onInput: lettersOnly,
+};
+
 export const ContactFormControls = ({ form, isEditing, onChange, onAvatarChange, onReset }: Props) => {
   return (
     <>
@@ -47,8 +59,8 @@ export const ContactFormControls = ({ form, isEditing, onChange, onAvatarChange,
       <AvatarSelector selected={form.avatar} onSelect={onAvatarChange} />
 
       <div className="contact-form-grid">
-        {renderField('Nombre', 'nombre', form.nombre, onChange, 'Ej: Laura')}
-        {renderField('Apellido', 'apellido', form.apellido, onChange, 'Ej: Perez')}
+        {renderField('Nombre', 'nombre', form.nombre, onChange, 'Ej: Laura', 'text', lettersOnlyProps)}
+        {renderField('Apellido', 'apellido', form.apellido, onChange, 'Ej: Perez', 'text', lettersOnlyProps)}
         {renderField('Numero de tlf', 'telefono', form.telefono, onChange, 'Ej: +54 11 5555 1234', 'tel', {
           inputMode: 'tel',
           pattern: '[0-9+-]*',

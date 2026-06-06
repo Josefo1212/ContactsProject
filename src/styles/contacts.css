@@ -263,7 +263,6 @@
 
 .contacts-grid.vista-1 .contact-card {
   max-width: 760px;
-  max-height: 200px;
 }
 
 .contacts-grid.vista-2 {
@@ -277,7 +276,6 @@
   text-align: center;
   --contact-name-max: 14ch;
   max-width: 200px;
-  max-height: 240px;
 }
 
 .contacts-grid.vista-2 .contact-card-main {
@@ -322,7 +320,6 @@
   border-radius: 18px;
   --contact-name-max: 22ch;
   max-width: 520px;
-  max-height: 200px;
 }
 
 .contacts-grid.vista-3 .contact-card-main {
@@ -341,7 +338,7 @@
 
 .contacts-grid.vista-4 .contact-card {
   width: 220px;
-  height: 160px;
+  min-height: 160px;
   padding: 12px;
   border-radius: 16px;
   align-content: space-between;
@@ -427,7 +424,7 @@
   border-radius: 20px;
   border: 1px solid rgba(115, 88, 57, 0.14);
   background: rgba(255, 255, 255, 0.76);
-  overflow: visible;
+  overflow: hidden;
   box-sizing: border-box;
   position: relative;
   transition: all 0.3s ease-in-out;
